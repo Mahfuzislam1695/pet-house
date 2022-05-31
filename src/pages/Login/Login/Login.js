@@ -1,19 +1,19 @@
 import { Container, Typography, TextField, Button, CircularProgress, Alert } from '@mui/material';
 import React from 'react';
 import { Grid } from '@mui/material';
-//import login from '../../../images/login.png'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 //import useAuth from './../../../hooks/useAuth';
 
 const Login = () => {
+    const {state, dispatch} = useContext(UserContext);
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
     });
-    // const { user, loginUser, signInWithGoogle, isLoading, authError } = useAuth();
-
-    // const location = useLocation();
     const navigate = useNavigate();
 
     const handleOnChange = e => {
@@ -25,9 +25,8 @@ const Login = () => {
     }
     const handleLoginSubmit = async (e) => {
         const {email, password} = loginData;
-        // loginUser(loginData.email, loginData.password, location, navigate);
         e.preventDefault();
-        const res = await fetch("http://localhost:5000/login",{
+        const res = await fetch("/login",{
             method:"POST",
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -39,8 +38,9 @@ const Login = () => {
         if( res.status === 400 || !data ){
             alert('Invalid')
         }else{
+            dispatch({type:"USER", payload:false})
             alert('Success')
-            navigate("/")
+            navigate("/about")
         }
     }
 

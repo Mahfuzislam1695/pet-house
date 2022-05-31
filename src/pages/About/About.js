@@ -1,12 +1,20 @@
+import { Button, Typography  } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useContext } from 'react';
+import { useState } from 'react';
+import { Container, Navbar, NavLink } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../App';
+import Navigation from '../Shared/Navigation/Navigation';
 
 const About = () => {
+    const {state, dispatch} = useContext(UserContext);
     const navigate = useNavigate();
+    const [userData, setUserData] = useState();
 
     const callAboutPage = async () => {
         try {
-            const res = await fetch('http://localhost:5000/about',{
+            const res = await fetch('/about',{
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
@@ -31,13 +39,16 @@ const About = () => {
 
     useEffect(() =>{
         callAboutPage();
+        
     },[]);
+    // dispatch({type:"USER", payload:true})
 
     return (
-        <div>
-           <h1>hi</h1> 
-        </div>
+        <>
+      <h1>this is about</h1>
+        </>
+        
     );
 };
 
-export default About;<h1>hi</h1>
+export default About;
