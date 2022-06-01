@@ -3,12 +3,9 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { UserContext } from '../../../App';
 //import useAuth from './../../../hooks/useAuth';
 
 const Login = () => {
-    const {state, dispatch} = useContext(UserContext);
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -38,7 +35,6 @@ const Login = () => {
         if( res.status === 400 || !data ){
             alert('Invalid')
         }else{
-            dispatch({type:"USER", payload:false})
             alert('Success')
             navigate("/about")
         }

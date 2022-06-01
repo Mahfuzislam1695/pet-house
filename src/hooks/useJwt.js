@@ -1,8 +1,49 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const useJwt = () => {
-//     const [user, setUser] = useState({});
-//     const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+
+
+    // const callAboutPage = async () => {
+    //     try {
+    //         const res = await fetch('/about',{
+    //             method: 'GET',
+    //             headers: {
+    //                 Accept: 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             credentials:"include"
+    //         });
+
+    //         const data = await res.json();
+    //         console.log(data);
+    //         console.log(data.email);
+    //         setUser(data)
+
+    //         if(!res.status === 200){
+    //             const error = new Error(res.error)
+    //             throw error;
+    //         }
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    // useEffect(() =>{
+    //     callAboutPage();
+        
+    // },[]);
+
+    useEffect(() => {
+        fetch('/about')
+            .then(res => res.json())
+            .then(data => setUser(data))
+            console.log(user);
+    }, [user])
+    
 //     const [authError, setAuthError] = useState('');
 //     const [admin, setAdmin] = useState(false);
 //     const [token, setToken] = useState('');
@@ -80,12 +121,12 @@ const useJwt = () => {
 //         return () => unsubscribed;
 //     }, [auth])
 
-//     useEffect(() => {
-//     //     fetch(`https://blooming-bastion-94256.herokuapp.com/users/${user.email}`)
-//         fetch(`https://arcane-fortress-62120.herokuapp.com/users/${user.email}`)
-//             .then(res => res.json())
-//             .then(data => setAdmin(data.admin))
-//     }, [user.email])
+    // useEffect(() => {
+    // //     fetch(`https://blooming-bastion-94256.herokuapp.com/users/${user.email}`)
+    //     fetch(`/users/${user.email}`)
+    //         .then(res => res.json())
+    //         .then(data => setUser(data))
+    // }, [user.email])
 
 //     const logout = () => {
 //         setIsLoading(true);
@@ -97,10 +138,10 @@ const useJwt = () => {
 //            .finally(() => setIsLoading(false));
 //     }
 
-//     const saveUser = (email, displayName, method) => {
-//         const user = { email, displayName };
+//     const saveUser = (email,  method) => {
+//         const user = { email,  };
 //     //     fetch('https://blooming-bastion-94256.herokuapp.com/users', {
-//         fetch('https://arcane-fortress-62120.herokuapp.com/users', {
+//         fetch('/users', {
 //             method: method,
 //              headers: {
 //                  'content-type': 'application/json'
@@ -111,10 +152,10 @@ const useJwt = () => {
 //    }
 
     return {
-//         user,
+        user,
 //         admin,
 //         token,
-//         isLoading,
+        isLoading,
 //         authError,
 //         registerUser,
 //         loginUser,
